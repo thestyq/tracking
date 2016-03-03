@@ -6,18 +6,23 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import ts.tracking.models.TrackingModel;
 
+import java.util.logging.Logger;
+
 /**
  * Created by styqq on 26.01.16.
  */
 public class TrackingDB {
+    private static final Logger LOG = Logger.getLogger(TrackingDB.class.getName());
     private static final String dbName = "tracking";
     private static final String collectionName = "data";
     private MongoCollection<Document> collection;
 
     public TrackingDB() {
+        LOG.info("Connecting to database...");
         MongoClient mongoClient = new MongoClient();
         MongoDatabase db = mongoClient.getDatabase(dbName);
         collection = db.getCollection(collectionName);
+        LOG.info("Connected! Collection: " + collection.getNamespace());
     }
 
     public void put(TrackingModel trackingModel) {
