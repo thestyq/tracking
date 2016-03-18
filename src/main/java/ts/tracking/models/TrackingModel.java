@@ -8,6 +8,7 @@ import org.bson.Document;
 public class TrackingModel implements Model {
     private long timestamp;
     private WindowResolutionModel windowResolution;
+    private HeaderModel headerModel;
 
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
@@ -17,16 +18,28 @@ public class TrackingModel implements Model {
         this.windowResolution = windowResolution;
     }
 
-    public static TrackingModel createTrackingModel(WindowResolutionModel windowResolutionModel) {
-        TrackingModel tm = new TrackingModel();
-        tm.setTimestamp(System.currentTimeMillis());
-        tm.setWindowResolution(windowResolutionModel);
-        return tm;
+    public void setHeaderModel(HeaderModel headerModel) {
+        this.headerModel = headerModel;
+    }
+
+    public TrackingModel() {
+        setTimestamp(System.currentTimeMillis());
+    }
+
+    public TrackingModel withWindowResolutionModel(WindowResolutionModel windowResolutionModel) {
+        setWindowResolution(windowResolutionModel);
+        return this;
+    }
+
+    public TrackingModel withHeaderModel(HeaderModel headerModel) {
+        setHeaderModel(headerModel);
+        return this;
     }
 
     public Document getAsDocument() {
         return new Document()
                 .append("timestamp", timestamp)
-                .append("windowResolution", windowResolution.getAsDocument());
+                .append("windowResolution", windowResolution.getAsDocument())
+                .append("headers", headerModel.getAsDocument());
     }
 }
