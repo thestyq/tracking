@@ -8,9 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-/**
- * Created by styqq on 04.01.16.
- */
 public class SaveDataServlet extends HttpServlet {
     private static final Logger LOG = Logger.getLogger(SaveDataServlet.class.getName());
 

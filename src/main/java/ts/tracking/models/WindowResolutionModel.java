@@ -2,9 +2,6 @@ package ts.tracking.models;
 
 import org.bson.Document;
 
-/**
- * Created by styqq on 26.01.16.
- */
 public class WindowResolutionModel implements Model {
     private String windowScreenHeight;
     private String windowScreenWidth;

@@ -8,9 +8,6 @@ import ts.tracking.models.TrackingModel;
 
 import java.util.logging.Logger;
 
-/**
- * Created by styqq on 26.01.16.
- */
 public class TrackingDB {
     private static final Logger LOG = Logger.getLogger(TrackingDB.class.getName());
     private static final String dbName = "tracking";

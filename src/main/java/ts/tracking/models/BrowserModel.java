@@ -2,9 +2,6 @@ package ts.tracking.models;
 
 import org.bson.Document;
 
-/**
- * Created by styqq on 27.03.16.
- */
 public class BrowserModel implements Model {
     private boolean isOpera;
     private boolean isFirefox;

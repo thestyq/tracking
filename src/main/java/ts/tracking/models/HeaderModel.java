@@ -5,9 +5,6 @@ import org.bson.Document;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by styqq on 18.03.16.
- */
 public class HeaderModel implements Model {
     private Map<String, String> headers = new HashMap<>();
 

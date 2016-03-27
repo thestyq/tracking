@@ -1,16 +1,12 @@
 package ts.tracking;
 
-import ts.tracking.models.BrowserModel;
-import ts.tracking.models.HeaderModel;
-import ts.tracking.models.TrackingModel;
-import ts.tracking.models.WindowResolutionModel;
+import ts.tracking.models.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 
-/**
- * Created by styqq on 18.03.16.
- */
 public class DataCollector {
     private TrackingDB db;
 
@@ -22,13 +18,14 @@ public class DataCollector {
         TrackingModel trackingModel = new TrackingModel()
                 .withWindowResolutionModel(createWindowResolutionModel(req))
                 .withHeaderModel(createHeaderModel(req))
-                .withBrowserModel(createBrowserModel(req));
+                .withBrowserModel(createBrowserModel(req))
+                .withFontsModel(createFontsModel(req));
 
 
         db.put(trackingModel);
     }
 
-    private WindowResolutionModel createWindowResolutionModel(HttpServletRequest req){
+    private WindowResolutionModel createWindowResolutionModel(HttpServletRequest req) {
         WindowResolutionModel windowResolutionModel = new WindowResolutionModel(
                 req.getParameter("window_screen_height"),
                 req.getParameter("window_screen_width"),
@@ -42,7 +39,7 @@ public class DataCollector {
         return windowResolutionModel;
     }
 
-    private BrowserModel createBrowserModel(HttpServletRequest req){
+    private BrowserModel createBrowserModel(HttpServletRequest req) {
         BrowserModel browserModel = new BrowserModel(
                 Boolean.parseBoolean(req.getParameter("isOpera")),
                 Boolean.parseBoolean(req.getParameter("isFirefox")),
@@ -53,6 +50,11 @@ public class DataCollector {
                 Boolean.parseBoolean(req.getParameter("isBlink"))
         );
         return browserModel;
+    }
+
+    private FontsModel createFontsModel(HttpServletRequest req) {
+        FontsModel fontsModel = new FontsModel(Arrays.asList(req.getParameter("fonts").split(",")));
+        return fontsModel;
     }
 
     private HeaderModel createHeaderModel(HttpServletRequest req) {

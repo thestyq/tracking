@@ -1,7 +1,3 @@
-/**
- * Created by styqq on 18.03.16.
- */
-
 function getResolutionData() {
     infoArray["window_screen_height"] = window.screen.height;
     infoArray["window_screen_width"] = window.screen.width;

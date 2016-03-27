@@ -310,7 +310,7 @@ Segoe UI
 Segoe UI Emoji
 Segoe UI Historic
 Segoe UI Symbol
-Segoe UI v5.00[
+Segoe UI v5.00
 Segoe UI v5.01
 Segoe UI v5.27
 Segoe UI v5.35

@@ -1,10 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ page import="java.io.BufferedReader" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.io.InputStream" %>
-<%@ page import="java.io.InputStreamReader" %>
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="js/data-collector.js"></script>
@@ -34,7 +29,8 @@
     <c:forEach var="font" items="${fonts}">
         detectFont("${font}");
     </c:forEach>
-    infoArray["fonts"] = fontArray;
+    infoArray["fonts"] = fontArray.toString();
+    console.log(infoArray["fonts"]);
 
     window.onload = function () {
         $.ajax({
