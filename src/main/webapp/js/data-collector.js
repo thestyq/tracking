@@ -29,3 +29,11 @@ function getBrowserData() {
     // Blink engine detection
     infoArray["isBlink"] = (infoArray["isChrome"] || infoArray["isOpera"]) && !!window.CSS;
 }
+
+function detectFont(font) {
+    var detector = new Detector();
+    var isDetected = detector.detect(font);
+    if (isDetected) {
+        fontArray.push(font);
+    }
+}
