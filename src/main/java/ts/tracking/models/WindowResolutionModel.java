@@ -15,14 +15,9 @@ public class WindowResolutionModel implements Model {
     private String windowScreenLeft;
     private String windowScreenTop;
 
-    public WindowResolutionModel(String windowScreenHeight,
-                                 String windowScreenWidth,
-                                 String windowScreenAvailableHeight,
-                                 String windowScreenAvailableWidth,
-                                 String windowInnerHeight,
-                                 String windowInnerWidth,
-                                 String windowScreenLeft,
-                                 String windowScreenTop) {
+    public WindowResolutionModel(String windowScreenHeight, String windowScreenWidth, String windowScreenAvailableHeight,
+                                 String windowScreenAvailableWidth, String windowInnerHeight, String windowInnerWidth,
+                                 String windowScreenLeft, String windowScreenTop) {
         this.windowScreenHeight = windowScreenHeight;
         this.windowScreenWidth = windowScreenWidth;
         this.windowScreenAvailableHeight = windowScreenAvailableHeight;

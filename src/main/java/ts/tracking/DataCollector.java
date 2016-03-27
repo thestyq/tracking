@@ -1,5 +1,6 @@
 package ts.tracking;
 
+import ts.tracking.models.BrowserModel;
 import ts.tracking.models.HeaderModel;
 import ts.tracking.models.TrackingModel;
 import ts.tracking.models.WindowResolutionModel;
@@ -20,7 +21,8 @@ public class DataCollector {
     public void collectData(HttpServletRequest req) {
         TrackingModel trackingModel = new TrackingModel()
                 .withWindowResolutionModel(createWindowResolutionModel(req))
-                .withHeaderModel(createHeaderModel(req));
+                .withHeaderModel(createHeaderModel(req))
+                .withBrowserModel(createBrowserModel(req));
 
 
         db.put(trackingModel);
@@ -38,6 +40,19 @@ public class DataCollector {
                 req.getParameter("window_screenTop")
         );
         return windowResolutionModel;
+    }
+
+    private BrowserModel createBrowserModel(HttpServletRequest req){
+        BrowserModel browserModel = new BrowserModel(
+                Boolean.parseBoolean(req.getParameter("isOpera")),
+                Boolean.parseBoolean(req.getParameter("isFirefox")),
+                Boolean.parseBoolean(req.getParameter("isSafari")),
+                Boolean.parseBoolean(req.getParameter("isIE")),
+                Boolean.parseBoolean(req.getParameter("isEdge")),
+                Boolean.parseBoolean(req.getParameter("isChrome")),
+                Boolean.parseBoolean(req.getParameter("isBlink"))
+        );
+        return browserModel;
     }
 
     private HeaderModel createHeaderModel(HttpServletRequest req) {

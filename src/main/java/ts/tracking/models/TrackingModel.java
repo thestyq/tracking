@@ -7,39 +7,36 @@ import org.bson.Document;
  */
 public class TrackingModel implements Model {
     private long timestamp;
-    private WindowResolutionModel windowResolution;
+    private WindowResolutionModel windowResolutionModel;
     private HeaderModel headerModel;
-
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public void setWindowResolution(WindowResolutionModel windowResolution) {
-        this.windowResolution = windowResolution;
-    }
-
-    public void setHeaderModel(HeaderModel headerModel) {
-        this.headerModel = headerModel;
-    }
+    private BrowserModel browserModel;
 
     public TrackingModel() {
-        setTimestamp(System.currentTimeMillis());
+        timestamp = System.currentTimeMillis();
     }
 
     public TrackingModel withWindowResolutionModel(WindowResolutionModel windowResolutionModel) {
-        setWindowResolution(windowResolutionModel);
+        this.windowResolutionModel = windowResolutionModel;
+        return this;
+    }
+
+    public TrackingModel withBrowserModel(BrowserModel browserModel) {
+        this.browserModel = browserModel;
         return this;
     }
 
     public TrackingModel withHeaderModel(HeaderModel headerModel) {
-        setHeaderModel(headerModel);
+        this.headerModel = headerModel;
         return this;
     }
 
     public Document getAsDocument() {
         return new Document()
                 .append("timestamp", timestamp)
-                .append("windowResolution", windowResolution.getAsDocument())
-                .append("headers", headerModel.getAsDocument());
+                .append("windowResolutionModel", windowResolutionModel.getAsDocument())
+                .append("browserModel", browserModel.getAsDocument())
+                .append("headerModel", headerModel.getAsDocument());
     }
+
+
 }
