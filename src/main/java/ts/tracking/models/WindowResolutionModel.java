@@ -7,22 +7,14 @@ public class WindowResolutionModel implements Model {
     private String windowScreenWidth;
     private String windowScreenAvailableHeight;
     private String windowScreenAvailableWidth;
-    private String windowInnerHeight;
-    private String windowInnerWidth;
-    private String windowScreenLeft;
-    private String windowScreenTop;
 
     public WindowResolutionModel(String windowScreenHeight, String windowScreenWidth, String windowScreenAvailableHeight,
-                                 String windowScreenAvailableWidth, String windowInnerHeight, String windowInnerWidth,
-                                 String windowScreenLeft, String windowScreenTop) {
+                                 String windowScreenAvailableWidth) {
         this.windowScreenHeight = windowScreenHeight;
         this.windowScreenWidth = windowScreenWidth;
         this.windowScreenAvailableHeight = windowScreenAvailableHeight;
         this.windowScreenAvailableWidth = windowScreenAvailableWidth;
-        this.windowInnerHeight = windowInnerHeight;
-        this.windowInnerWidth = windowInnerWidth;
-        this.windowScreenLeft = windowScreenLeft;
-        this.windowScreenTop = windowScreenTop;
+
     }
 
     public Document getAsDocument() {
@@ -30,10 +22,6 @@ public class WindowResolutionModel implements Model {
                 .append("windowScreenHeight", windowScreenHeight)
                 .append("windowScreenWidth", windowScreenWidth)
                 .append("windowScreenAvailableHeight", windowScreenAvailableHeight)
-                .append("windowScreenAvailableWidth", windowScreenAvailableWidth)
-                .append("windowInnerHeight", windowInnerHeight)
-                .append("windowInnerWidth", windowInnerWidth)
-                .append("windowScreenLeft", windowScreenLeft)
-                .append("windowScreenTop", windowScreenTop);
+                .append("windowScreenAvailableWidth", windowScreenAvailableWidth);
     }
 }

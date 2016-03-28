@@ -30,7 +30,6 @@
         detectFont("${font}");
     </c:forEach>
     infoArray["fonts"] = fontArray.toString();
-    console.log(infoArray["fonts"]);
 
     window.onload = function () {
         $.ajax({

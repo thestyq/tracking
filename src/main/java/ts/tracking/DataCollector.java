@@ -1,9 +1,10 @@
 package ts.tracking;
 
+import org.apache.commons.lang3.StringUtils;
+import org.bson.Document;
 import ts.tracking.models.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
 
@@ -14,15 +15,32 @@ public class DataCollector {
         db = new TrackingDB();
     }
 
-    public void collectData(HttpServletRequest req) {
-        TrackingModel trackingModel = new TrackingModel()
+    public String collectData(HttpServletRequest req) {
+        TrackingModelWrapper trackingModelWrapper = new TrackingModelWrapper(
+                new TrackingModel()
                 .withWindowResolutionModel(createWindowResolutionModel(req))
                 .withHeaderModel(createHeaderModel(req))
                 .withBrowserModel(createBrowserModel(req))
-                .withFontsModel(createFontsModel(req));
+                .withFontsModel(createFontsModel(req)));
+        db.putData(trackingModelWrapper);
+        return trackingModelWrapper.getId();
+    }
 
+    public void visit(String id, String cookie) {
+        VisitModel visitModel;
+        Document visit = db.getVisit(id);
+        if (visit == null) {
+            visitModel = new VisitModel(id);
+        } else {
+            visitModel = new VisitModel(visit);
+        }
 
-        db.put(trackingModel);
+        if (!StringUtils.equals(id, cookie) & !StringUtils.isBlank(cookie)) {
+            visitModel.addAlternativeId(cookie);
+        }
+
+        visitModel.recordVisit(System.currentTimeMillis());
+        db.putVisit(visitModel);
     }
 
     private WindowResolutionModel createWindowResolutionModel(HttpServletRequest req) {
@@ -30,11 +48,7 @@ public class DataCollector {
                 req.getParameter("window_screen_height"),
                 req.getParameter("window_screen_width"),
                 req.getParameter("window_screen_availHeight"),
-                req.getParameter("window_screen_availWidth"),
-                req.getParameter("window_innerHeight"),
-                req.getParameter("window_innerWidth"),
-                req.getParameter("window_screenLeft"),
-                req.getParameter("window_screenTop")
+                req.getParameter("window_screen_availWidth")
         );
         return windowResolutionModel;
     }
@@ -62,8 +76,14 @@ public class DataCollector {
         HeaderModel headerModel = new HeaderModel();
         while (headerNames.hasMoreElements()) {
             String nextHeader = headerNames.nextElement();
-            headerModel.addEntry(nextHeader, req.getHeader(nextHeader));
+            if (!StringUtils.equals(nextHeader, "cookie")) {
+                headerModel.addEntry(nextHeader, req.getHeader(nextHeader));
+            }
         }
         return headerModel;
+    }
+
+    void setDb(TrackingDB db) {
+        this.db = db;
     }
 }

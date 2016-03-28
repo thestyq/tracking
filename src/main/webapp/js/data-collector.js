@@ -3,10 +3,6 @@ function getResolutionData() {
     infoArray["window_screen_width"] = window.screen.width;
     infoArray["window_screen_availHeight"] = window.screen.availHeight;
     infoArray["window_screen_availWidth"] = window.screen.availWidth;
-    infoArray["window_innerHeight"] = window.innerHeight;
-    infoArray["window_innerWidth"] = window.innerWidth;
-    infoArray["window_screenLeft"] = window.screenLeft;
-    infoArray["window_screenTop"] = window.screenTop;
 }
 
 function getBrowserData() {
