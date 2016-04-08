@@ -44,31 +44,29 @@ public class DataCollector {
     }
 
     private WindowResolutionModel createWindowResolutionModel(HttpServletRequest req) {
-        WindowResolutionModel windowResolutionModel = new WindowResolutionModel(
+        return new WindowResolutionModel(
                 req.getParameter("window_screen_height"),
                 req.getParameter("window_screen_width"),
                 req.getParameter("window_screen_availHeight"),
                 req.getParameter("window_screen_availWidth")
         );
-        return windowResolutionModel;
     }
 
     private BrowserModel createBrowserModel(HttpServletRequest req) {
-        BrowserModel browserModel = new BrowserModel(
+        return new BrowserModel(
                 Boolean.parseBoolean(req.getParameter("isOpera")),
                 Boolean.parseBoolean(req.getParameter("isFirefox")),
                 Boolean.parseBoolean(req.getParameter("isSafari")),
                 Boolean.parseBoolean(req.getParameter("isIE")),
                 Boolean.parseBoolean(req.getParameter("isEdge")),
                 Boolean.parseBoolean(req.getParameter("isChrome")),
-                Boolean.parseBoolean(req.getParameter("isBlink"))
+                Boolean.parseBoolean(req.getParameter("isBlink")),
+                Arrays.asList(req.getParameter("addons").split(","))
         );
-        return browserModel;
     }
 
     private FontsModel createFontsModel(HttpServletRequest req) {
-        FontsModel fontsModel = new FontsModel(Arrays.asList(req.getParameter("fonts").split(",")));
-        return fontsModel;
+        return new FontsModel(Arrays.asList(req.getParameter("fonts").split(",")));
     }
 
     private HeaderModel createHeaderModel(HttpServletRequest req) {

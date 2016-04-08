@@ -2,6 +2,9 @@ package ts.tracking.models;
 
 import org.bson.Document;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BrowserModel implements Model {
     private boolean isOpera;
     private boolean isFirefox;
@@ -10,9 +13,10 @@ public class BrowserModel implements Model {
     private boolean isEdge;
     private boolean isChrome;
     private boolean isBlink;
+    private List<String> addons = new ArrayList<>();
 
     public BrowserModel(boolean isOpera, boolean isFirefox, boolean isSafari,
-                        boolean isIE, boolean isEdge, boolean isChrome, boolean isBlink) {
+                        boolean isIE, boolean isEdge, boolean isChrome, boolean isBlink, List<String> addons) {
         this.isOpera = isOpera;
         this.isFirefox = isFirefox;
         this.isSafari = isSafari;
@@ -20,6 +24,7 @@ public class BrowserModel implements Model {
         this.isEdge = isEdge;
         this.isChrome = isChrome;
         this.isBlink = isBlink;
+        this.addons = addons;
     }
 
     public Document getAsDocument() {
@@ -30,6 +35,7 @@ public class BrowserModel implements Model {
                 .append("isIE", isIE)
                 .append("isEdge", isEdge)
                 .append("isChrome", isChrome)
-                .append("isBlink", isBlink);
+                .append("isBlink", isBlink)
+                .append("addons", addons);
     }
 }

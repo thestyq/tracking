@@ -232,11 +232,14 @@ Microsoft Uighur
 Microsoft YaHei
 Microsoft YaHei UI
 Microsoft Yi Baiti
-MingLiU-ExtB, PMingLiU-ExtB
+MingLiU-ExtB
+PMingLiU-ExtB
 MingLiU_HKSCS
 MingLiU_HKSCS-ExtB
-MingLiU, PMingLiU
-Miriam, Miriam Fixed
+MingLiU
+PMingLiU
+Miriam
+Miriam Fixed
 Mistral
 Modern No. 20
 Monaco
@@ -245,8 +248,10 @@ Monospace
 Monotype Corsiva
 MoolBoran
 mry_KacstQurn
-MS Gothic, MS PGothic
-MS Mincho, MS PMincho
+MS Gothic
+MS PGothic
+MS Mincho
+MS PMincho
 MS UI Gothic
 Mukti Narrow
 MV Boli
@@ -295,7 +300,7 @@ Ravie
 Rekha
 Rockwell
 Rockwell Nova
-Rod	Regular
+Rod
 Saab
 Sakkal Majalla
 Sans
