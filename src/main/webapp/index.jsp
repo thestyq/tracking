@@ -24,14 +24,26 @@
 
     // fonts
     fontArray = [];
-    <c:import var="data" url="fonts.txt"/>
-    <c:set var="fonts" value="${fn:split(data, newLineChar)}" />
+    <c:import var="fonts_data" url="data/fonts.txt"/>
+    <c:set var="fonts" value="${fn:split(fonts_data, newLineChar)}" />
     <c:forEach var="font" items="${fonts}">
         detectFont("${font}");
     </c:forEach>
     infoArray["fonts"] = fontArray.toString();
 
+    // addons
+    addons = [];
+    if (infoArray["isFirefox"]) {
+        <c:import var="firefox_addons_data" url="data/firefox_addons.txt"/>
+        <c:set var="firefox_addons" value="${fn:split(firefox_addons_data, newLineChar)}" />
+        <c:forEach var="firefox_addon" items="${firefox_addons}">
+            detectFirefoxAddon("${firefox_addon}");
+        </c:forEach>
+    }
+
     window.onload = function () {
+        infoArray["addons"] = addons.toString();
+        console.log(addons);
         $.ajax({
             url: '/save',
             type: 'POST',

@@ -29,3 +29,14 @@ function detectFont(font) {
         fontArray.push(font);
     }
 }
+
+function detectFirefoxAddon(addon) {
+    var script = document.createElement('script');
+    script.onload = function () {
+        var addonName = addon.substring(9);
+        var slashIndex = addonName.indexOf("/");
+        addons.push(addonName.substring(0, slashIndex));
+    }
+    script.src = addon;
+    document.getElementsByTagName('head')[0].appendChild(script);
+}
