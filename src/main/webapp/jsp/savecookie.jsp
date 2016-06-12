@@ -1,0 +1,21 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<script src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+<script src="../evercookie/js/evercookie.js"></script>
+
+<html>
+<head>
+    <title>AlphaTwo</title>
+</head>
+<body>
+<script>
+    // save cookie
+    var ec = new Evercookie({phpuri:"/evercookie/php", asseturi:"/evercookie/assets", history:false});
+    var cookieId = "tracking_test4";
+    var cookiePrefix = "TC_";
+    var cookie = cookiePrefix + "${param.cookie}";
+    ec.set(cookieId, cookie);
+</script>
+Thanks!
+</body>
+</html>

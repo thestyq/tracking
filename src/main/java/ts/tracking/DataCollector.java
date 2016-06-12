@@ -18,10 +18,10 @@ public class DataCollector {
     public String collectData(HttpServletRequest req) {
         TrackingModelWrapper trackingModelWrapper = new TrackingModelWrapper(
                 new TrackingModel()
-                .withWindowResolutionModel(createWindowResolutionModel(req))
-                .withHeaderModel(createHeaderModel(req))
-                .withBrowserModel(createBrowserModel(req))
-                .withFontsModel(createFontsModel(req)));
+                        .withWindowResolutionModel(createWindowResolutionModel(req))
+                        .withHeaderModel(createHeaderModel(req))
+                        .withBrowserModel(createBrowserModel(req))
+                        .withFontsModel(createFontsModel(req)));
         db.putData(trackingModelWrapper);
         return trackingModelWrapper.getId();
     }
@@ -34,11 +34,9 @@ public class DataCollector {
         } else {
             visitModel = new VisitModel(visit);
         }
-
         if (!StringUtils.equals(id, cookie) & !StringUtils.isBlank(cookie)) {
             visitModel.addAlternativeId(cookie);
         }
-
         visitModel.recordVisit(System.currentTimeMillis());
         db.putVisit(visitModel);
     }
@@ -53,16 +51,16 @@ public class DataCollector {
     }
 
     private BrowserModel createBrowserModel(HttpServletRequest req) {
-        return new BrowserModel(
-                Boolean.parseBoolean(req.getParameter("isOpera")),
-                Boolean.parseBoolean(req.getParameter("isFirefox")),
-                Boolean.parseBoolean(req.getParameter("isSafari")),
-                Boolean.parseBoolean(req.getParameter("isIE")),
-                Boolean.parseBoolean(req.getParameter("isEdge")),
-                Boolean.parseBoolean(req.getParameter("isChrome")),
-                Boolean.parseBoolean(req.getParameter("isBlink")),
-                Arrays.asList(req.getParameter("addons").split(","))
-        );
+        return BrowserModel.builder()
+                .withIsOpera(Boolean.parseBoolean(req.getParameter("isOpera")))
+                .withIsFirefox(Boolean.parseBoolean(req.getParameter("isFirefox")))
+                .withIsBlink(Boolean.parseBoolean(req.getParameter("isBlink")))
+                .withIsChrome(Boolean.parseBoolean(req.getParameter("isChrome")))
+                .withIsEdge(Boolean.parseBoolean(req.getParameter("isEdge")))
+                .withIsIE(Boolean.parseBoolean(req.getParameter("isIE")))
+                .withIsSafari(Boolean.parseBoolean(req.getParameter("isSafari")))
+                .withAddons(Arrays.asList(req.getParameter("addons").split(",")))
+                .build();
     }
 
     private FontsModel createFontsModel(HttpServletRequest req) {
@@ -74,7 +72,7 @@ public class DataCollector {
         HeaderModel headerModel = new HeaderModel();
         while (headerNames.hasMoreElements()) {
             String nextHeader = headerNames.nextElement();
-            if (!StringUtils.equals(nextHeader, "cookie")) {
+            if (!StringUtils.equals(StringUtils.lowerCase(nextHeader), "cookie")) {
                 headerModel.addEntry(nextHeader, req.getHeader(nextHeader));
             }
         }

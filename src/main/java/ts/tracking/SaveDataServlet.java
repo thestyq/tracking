@@ -12,24 +12,24 @@ public class SaveDataServlet extends HttpServlet {
     private static final Logger LOG = Logger.getLogger(SaveDataServlet.class.getName());
 
     private DataCollector dataCollector;
-    private CookieHandler cookieHandler;
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         dataCollector = new DataCollector();
-        cookieHandler = new CookieHandler();
     }
 
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LOG.info("Some data arrived!");
 
-        String cookie = cookieHandler.getCookieValue(req);
+        String oldCookie = req.getParameter("oldCookie");
+        LOG.info("Old hash: " + oldCookie);
+
         String id = dataCollector.collectData(req);
-        dataCollector.visit(id, cookie);
+        dataCollector.visit(id, oldCookie);
 
-        cookieHandler.addCookie(resp, id);
+        LOG.info("New hash: " + id);
+        resp.sendRedirect("savecookie?cookie=" + id);
     }
-
-
 
 }

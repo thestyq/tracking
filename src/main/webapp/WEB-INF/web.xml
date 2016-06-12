@@ -4,6 +4,20 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <servlet>
+        <servlet-name>CookieServlet</servlet-name>
+        <jsp-file>/jsp/savecookie.jsp</jsp-file>
+    </servlet>
+    <!--mapping-->
+    <servlet-mapping>
+        <servlet-name>CookieServlet</servlet-name>
+        <url-pattern>/savecookie</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>SaveDataServlet</servlet-name>
         <servlet-class>ts.tracking.SaveDataServlet</servlet-class>

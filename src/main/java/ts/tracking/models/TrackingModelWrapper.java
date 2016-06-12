@@ -5,9 +5,6 @@ import org.bson.Document;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/**
- * Created by styqq on 28.03.16.
- */
 public class TrackingModelWrapper implements Model {
     private String id;
     private TrackingModel trackingModel;

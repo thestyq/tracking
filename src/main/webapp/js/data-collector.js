@@ -36,7 +36,13 @@ function detectFirefoxAddon(addon) {
         var addonName = addon.substring(9);
         var slashIndex = addonName.indexOf("/");
         addons.push(addonName.substring(0, slashIndex));
-    }
+    };
     script.src = addon;
     document.getElementsByTagName('head')[0].appendChild(script);
+}
+
+function detectLocation() {
+    $.getJSON('//www.geoplugin.net/json.gp?jsoncallback=?', function (data) {
+        location = JSON.stringify(data, null, 2);
+    });
 }

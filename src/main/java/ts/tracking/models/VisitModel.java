@@ -5,9 +5,6 @@ import org.bson.Document;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by styqq on 28.03.16.
- */
 public class VisitModel implements Model {
     private String id;
     private List<Long> visits = new ArrayList<>();

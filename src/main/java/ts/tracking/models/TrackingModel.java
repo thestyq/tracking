@@ -2,9 +2,6 @@ package ts.tracking.models;
 
 import org.bson.Document;
 
-/**
- * Created by styqq on 26.01.16.
- */
 public class TrackingModel implements Model {
     private WindowResolutionModel windowResolutionModel;
     private HeaderModel headerModel;
