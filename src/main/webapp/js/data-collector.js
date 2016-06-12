@@ -1,25 +1,25 @@
 function getResolutionData() {
-    infoArray["window_screen_height"] = window.screen.height;
-    infoArray["window_screen_width"] = window.screen.width;
-    infoArray["window_screen_availHeight"] = window.screen.availHeight;
-    infoArray["window_screen_availWidth"] = window.screen.availWidth;
+    resolution["windowScreenHeight"] = window.screen.height;
+    resolution["windowScreenWidth"] = window.screen.width;
+    resolution["windowScreenAvailableHeight"] = window.screen.availHeight;
+    resolution["windowScreenAvailableWidth"] = window.screen.availWidth;
 }
 
 function getBrowserData() {
     // Opera 8.0+
-    infoArray["isOpera"] = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+    browserData["isOpera"] = (!!window.opr && !!opr.addonArray) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
     // Firefox 1.0+
-    infoArray["isFirefox"] = typeof InstallTrigger !== 'undefined';
+    browserData["isFirefox"] = typeof InstallTrigger !== 'undefined';
     // At least Safari 3+: "[object HTMLElementConstructor]"
-    infoArray["isSafari"] = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+    browserData["isSafari"] = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
     // Internet Explorer 6-11
-    infoArray["isIE"] = /*@cc_on!@*/false || !!document.documentMode;
+    browserData["isIE"] = /*@cc_on!@*/false || !!document.documentMode;
     // Edge 20+
-    infoArray["isEdge"] = !infoArray["isIE"] && !!window.StyleMedia;
+    browserData["isEdge"] = !infoArray["isIE"] && !!window.StyleMedia;
     // Chrome 1+
-    infoArray["isChrome"] = !!window.chrome && !!window.chrome.webstore;
+    browserData["isChrome"] = !!window.chrome && !!window.chrome.webstore;
     // Blink engine detection
-    infoArray["isBlink"] = (infoArray["isChrome"] || infoArray["isOpera"]) && !!window.CSS;
+    browserData["isBlink"] = (infoArray["isChrome"] || infoArray["isOpera"]) && !!window.CSS;
 }
 
 function detectFont(font) {
@@ -35,14 +35,29 @@ function detectFirefoxAddon(addon) {
     script.onload = function () {
         var addonName = addon.substring(9);
         var slashIndex = addonName.indexOf("/");
-        addons.push(addonName.substring(0, slashIndex));
+        addonArray.push(addonName.substring(0, slashIndex));
     };
     script.src = addon;
     document.getElementsByTagName('head')[0].appendChild(script);
 }
 
-function detectLocation() {
+function getLocalisation() {
     $.getJSON('//www.geoplugin.net/json.gp?jsoncallback=?', function (data) {
-        location = JSON.stringify(data, null, 2);
+        localisation["request"] = data.geoplugin_request;
+        localisation["status"] = data.geoplugin_status;
+        localisation["city"] = data.geoplugin_city;
+        localisation["region"] = data.geoplugin_region;
+        localisation["areaCode"] = data.geoplugin_areaCode;
+        localisation["dmaCode"] = data.geoplugin_dmaCode;
+        localisation["countryCode"] = data.geoplugin_countryCode;
+        localisation["countryName"] = data.geoplugin_countryName;
+        localisation["continentCode"] = data.geoplugin_continentCode;
+        localisation["latitude"] = data.geoplugin_latitude;
+        localisation["longtitude"] = data.geoplugin_longitude;
+        localisation["regionCode"] = data.geoplugin_regionCode;
+        localisation["regionName"] = data.geoplugin_regionName;
+        localisation["currencyCode"] = data.geoplugin_currencyCode;
+        localisation["currencySymbol"] = data.geoplugin_currencySymbol;
+        localisation["currencyConverter"] = data.geoplugin_currencyConverter;
     });
 }

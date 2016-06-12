@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <script src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
@@ -13,9 +14,10 @@
     var ec = new Evercookie({phpuri:"/evercookie/php", asseturi:"/evercookie/assets", history:false});
     var cookieId = "tracking_test4";
     var cookiePrefix = "TC_";
-    var cookie = cookiePrefix + "${param.cookie}";
-    ec.set(cookieId, cookie);
+    var cookie = "${param.cookie}";
+    ec.set(cookieId, cookiePrefix + cookie);
+    document.write("Thanks! <br>");
+    document.write("Your fingerprint: " + cookie);
 </script>
-Thanks!
 </body>
 </html>

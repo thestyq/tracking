@@ -7,6 +7,8 @@ public class TrackingModel implements Model {
     private HeaderModel headerModel;
     private BrowserModel browserModel;
     private FontsModel fontsModel;
+    private AddonsModel addonsModel;
+    private LocalisationModel localisationModel;
 
     public TrackingModel withWindowResolutionModel(WindowResolutionModel windowResolutionModel) {
         this.windowResolutionModel = windowResolutionModel;
@@ -28,12 +30,24 @@ public class TrackingModel implements Model {
         return this;
     }
 
+    public TrackingModel withAddonsModel(AddonsModel addonsModel) {
+        this.addonsModel = addonsModel;
+        return this;
+    }
+
+    public TrackingModel withLocalisationModel(LocalisationModel localisationModel) {
+        this.localisationModel = localisationModel;
+        return this;
+    }
+
     public Document getAsDocument() {
         return new Document()
                 .append("windowResolutionModel", windowResolutionModel.getAsDocument())
                 .append("browserModel", browserModel.getAsDocument())
                 .append("headerModel", headerModel.getAsDocument())
-                .append("fontsModel", fontsModel.getAsDocument());
+                .append("fontsModel", fontsModel.getAsDocument())
+                .append("addonsModel", addonsModel.getAsDocument())
+                .append("localisationModel", localisationModel.getAsDocument());
     }
 
 

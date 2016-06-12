@@ -8,13 +8,7 @@ public class WindowResolutionModel implements Model {
     private String windowScreenAvailableHeight;
     private String windowScreenAvailableWidth;
 
-    public WindowResolutionModel(String windowScreenHeight, String windowScreenWidth, String windowScreenAvailableHeight,
-                                 String windowScreenAvailableWidth) {
-        this.windowScreenHeight = windowScreenHeight;
-        this.windowScreenWidth = windowScreenWidth;
-        this.windowScreenAvailableHeight = windowScreenAvailableHeight;
-        this.windowScreenAvailableWidth = windowScreenAvailableWidth;
-
+    public WindowResolutionModel() {
     }
 
     public Document getAsDocument() {

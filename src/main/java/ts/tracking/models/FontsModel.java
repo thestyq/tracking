@@ -2,14 +2,12 @@ package ts.tracking.models;
 
 import org.bson.Document;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FontsModel implements Model {
-    private List<String> fonts = new ArrayList<>();
+    private List<String> fonts;
 
-    public FontsModel(List<String> fonts) {
-        this.fonts = fonts;
+    public FontsModel() {
     }
 
     @Override

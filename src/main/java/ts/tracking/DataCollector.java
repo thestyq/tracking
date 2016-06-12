@@ -1,5 +1,6 @@
 package ts.tracking;
 
+import com.google.gson.Gson;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.Document;
 import ts.tracking.models.*;
@@ -21,7 +22,9 @@ public class DataCollector {
                         .withWindowResolutionModel(createWindowResolutionModel(req))
                         .withHeaderModel(createHeaderModel(req))
                         .withBrowserModel(createBrowserModel(req))
-                        .withFontsModel(createFontsModel(req)));
+                        .withAddonsModel(createAddonModel(req))
+                        .withFontsModel(createFontsModel(req))
+                        .withLocalisationModel(createLocalisationModel(req)));
         db.putData(trackingModelWrapper);
         return trackingModelWrapper.getId();
     }
@@ -42,29 +45,19 @@ public class DataCollector {
     }
 
     private WindowResolutionModel createWindowResolutionModel(HttpServletRequest req) {
-        return new WindowResolutionModel(
-                req.getParameter("window_screen_height"),
-                req.getParameter("window_screen_width"),
-                req.getParameter("window_screen_availHeight"),
-                req.getParameter("window_screen_availWidth")
-        );
+        return new Gson().fromJson(req.getParameter("resolution"), WindowResolutionModel.class);
     }
 
     private BrowserModel createBrowserModel(HttpServletRequest req) {
-        return BrowserModel.builder()
-                .withIsOpera(Boolean.parseBoolean(req.getParameter("isOpera")))
-                .withIsFirefox(Boolean.parseBoolean(req.getParameter("isFirefox")))
-                .withIsBlink(Boolean.parseBoolean(req.getParameter("isBlink")))
-                .withIsChrome(Boolean.parseBoolean(req.getParameter("isChrome")))
-                .withIsEdge(Boolean.parseBoolean(req.getParameter("isEdge")))
-                .withIsIE(Boolean.parseBoolean(req.getParameter("isIE")))
-                .withIsSafari(Boolean.parseBoolean(req.getParameter("isSafari")))
-                .withAddons(Arrays.asList(req.getParameter("addons").split(",")))
-                .build();
+        return new Gson().fromJson(req.getParameter("browserData"), BrowserModel.class);
     }
 
     private FontsModel createFontsModel(HttpServletRequest req) {
-        return new FontsModel(Arrays.asList(req.getParameter("fonts").split(",")));
+        return new Gson().fromJson(req.getParameter("fonts"), FontsModel.class);
+    }
+
+    private LocalisationModel createLocalisationModel(HttpServletRequest req) {
+        return new Gson().fromJson(req.getParameter("localisation"), LocalisationModel.class);
     }
 
     private HeaderModel createHeaderModel(HttpServletRequest req) {
@@ -77,6 +70,10 @@ public class DataCollector {
             }
         }
         return headerModel;
+    }
+
+    private AddonsModel createAddonModel(HttpServletRequest req) {
+        return new Gson().fromJson(req.getParameter("addons"), AddonsModel.class);
     }
 
     void setDb(TrackingDB db) {
