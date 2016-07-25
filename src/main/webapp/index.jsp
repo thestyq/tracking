@@ -11,7 +11,7 @@
 
 <html>
 <head>
-    <title>AlphaOne</title>
+    <title>Phase one</title>
 </head>
 <body>
 Please wait...
@@ -61,7 +61,7 @@ Please wait...
 
         // cookie from evercookie
         var ec = new Evercookie({phpuri: "/evercookie/php", asseturi: "/evercookie/assets", history: false});
-        var cookieId = "tracking_test4";
+        var cookieId = "tracking";
         var cookiePrefix = "TC_";
         ec.get(cookieId, function (value) {
             if (value.startsWith(cookiePrefix)) {
@@ -82,5 +82,9 @@ Please wait...
     }
 
 </script>
+
+<noscript>
+    Please enable JavaScript.
+</noscript>
 </body>
 </html>

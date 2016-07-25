@@ -12,7 +12,7 @@
 <script>
     // save cookie
     var ec = new Evercookie({phpuri:"/evercookie/php", asseturi:"/evercookie/assets", history:false});
-    var cookieId = "tracking_test4";
+    var cookieId = "tracking";
     var cookiePrefix = "TC_";
     var cookie = "${param.cookie}";
     ec.set(cookieId, cookiePrefix + cookie);

@@ -1,12 +1,16 @@
 package ts.tracking;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import ts.tracking.models.TrackingModelWrapper;
 import ts.tracking.models.VisitModel;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import static com.mongodb.client.model.Filters.eq;
@@ -19,10 +23,15 @@ public class TrackingDB {
     private MongoCollection<Document> dataCollection;
     private MongoCollection<Document> visitCollection;
 
-    public TrackingDB() {
+    public TrackingDB(String host, int port, String username, String password) {
         LOG.info("Connecting to database...");
-        MongoClient mongoClient = new MongoClient();
+
+        List<MongoCredential> mongoCredentials = new ArrayList<>();
+        mongoCredentials.add(MongoCredential.createCredential(username, dbName, password.toCharArray()));
+        MongoClient mongoClient = new MongoClient(new ServerAddress(host, port), mongoCredentials);
+
         MongoDatabase db = mongoClient.getDatabase(dbName);
+
         dataCollection = db.getCollection(dataCollectionName);
         visitCollection = db.getCollection(visitCollectionName);
         LOG.info("Connected! Collection: " + dataCollection.getNamespace());

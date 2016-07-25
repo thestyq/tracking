@@ -12,8 +12,8 @@ import java.util.Enumeration;
 public class DataCollector {
     private TrackingDB db;
 
-    public DataCollector() {
-        db = new TrackingDB();
+    public DataCollector(TrackingDB db) {
+        this.db = db;
     }
 
     public String collectData(HttpServletRequest req) {
