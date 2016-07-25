@@ -6,7 +6,7 @@
 
 <html>
 <head>
-    <title>AlphaTwo</title>
+    <title>Phase Two</title>
 </head>
 <body>
 <script>
