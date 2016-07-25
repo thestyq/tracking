@@ -30,6 +30,11 @@ function detectFont(font) {
     }
 }
 
+function detectPlugin(plugin) {
+    var pluginName = plugin.substring(0,1).toLocaleLowerCase() + plugin.substring(1).split(' ').join("");
+    plugins[pluginName] = pluginlist.indexOf(plugin)!=-1;
+}
+
 function detectFirefoxAddon(addon) {
     var script = document.createElement('script');
     script.onload = function () {
@@ -45,7 +50,6 @@ function getLocalisation() {
     $.getJSON('//www.geoplugin.net/json.gp?jsoncallback=?', function (data) {
         localisation["request"] = data.geoplugin_request;
         localisation["status"] = data.geoplugin_status;
-        localisation["city"] = data.geoplugin_city;
         localisation["region"] = data.geoplugin_region;
         localisation["areaCode"] = data.geoplugin_areaCode;
         localisation["dmaCode"] = data.geoplugin_dmaCode;

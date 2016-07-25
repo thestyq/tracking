@@ -1,0 +1,10 @@
+QuickTime
+DevalVR
+Flash
+Shockwave
+Windows Media Player
+Silverlight
+VLC Player
+RealPlayer
+Component
+ActiveX

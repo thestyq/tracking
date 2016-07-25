@@ -5,7 +5,6 @@ import org.bson.Document;
 public class LocalisationModel implements Model {
     private String request;
     private String status;
-    private String city;
     private String region;
     private String areaCode;
     private String dmaCode;
@@ -28,7 +27,6 @@ public class LocalisationModel implements Model {
         return new Document()
                 .append("request", request)
                 .append("status", status)
-                .append("city", city)
                 .append("region", region)
                 .append("areaCode", areaCode)
                 .append("dmaCode", dmaCode)

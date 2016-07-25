@@ -24,7 +24,8 @@ public class DataCollector {
                         .withBrowserModel(createBrowserModel(req))
                         .withAddonsModel(createAddonModel(req))
                         .withFontsModel(createFontsModel(req))
-                        .withLocalisationModel(createLocalisationModel(req)));
+                        .withLocalisationModel(createLocalisationModel(req))
+                        .withPluginModel(createPluginModel(req)));
         db.putData(trackingModelWrapper);
         return trackingModelWrapper.getId();
     }
@@ -60,14 +61,15 @@ public class DataCollector {
         return new Gson().fromJson(req.getParameter("localisation"), LocalisationModel.class);
     }
 
+    private PluginModel createPluginModel(HttpServletRequest req) {
+        return new Gson().fromJson(req.getParameter("plugins"), PluginModel.class);
+    }
+
     private HeaderModel createHeaderModel(HttpServletRequest req) {
-        Enumeration<String> headerNames = req.getHeaderNames();
         HeaderModel headerModel = new HeaderModel();
-        while (headerNames.hasMoreElements()) {
-            String nextHeader = headerNames.nextElement();
-            if (!StringUtils.equals(StringUtils.lowerCase(nextHeader), "cookie")) {
-                headerModel.addEntry(nextHeader, req.getHeader(nextHeader));
-            }
+        for (Header header : Header.values()) {
+            String headerName = header.getHeader();
+            headerModel.addEntry(headerName, req.getHeader(headerName));
         }
         return headerModel;
     }

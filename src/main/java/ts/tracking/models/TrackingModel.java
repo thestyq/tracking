@@ -9,6 +9,7 @@ public class TrackingModel implements Model {
     private FontsModel fontsModel;
     private AddonsModel addonsModel;
     private LocalisationModel localisationModel;
+    private PluginModel pluginModel;
 
     public TrackingModel withWindowResolutionModel(WindowResolutionModel windowResolutionModel) {
         this.windowResolutionModel = windowResolutionModel;
@@ -40,6 +41,11 @@ public class TrackingModel implements Model {
         return this;
     }
 
+    public TrackingModel withPluginModel(PluginModel pluginModel) {
+        this.pluginModel = pluginModel;
+        return this;
+    }
+
     public Document getAsDocument() {
         return new Document()
                 .append("windowResolutionModel", windowResolutionModel.getAsDocument())
@@ -47,7 +53,8 @@ public class TrackingModel implements Model {
                 .append("headerModel", headerModel.getAsDocument())
                 .append("fontsModel", fontsModel.getAsDocument())
                 .append("addonsModel", addonsModel.getAsDocument())
-                .append("localisationModel", localisationModel.getAsDocument());
+                .append("localisationModel", localisationModel.getAsDocument())
+                .append("pluginModel", pluginModel.getAsDocument());
     }
 
 

@@ -5,7 +5,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -20,21 +19,21 @@ public class SaveDataServlet extends HttpServlet {
         super.init(config);
         LOG.info("Initialization...");
 
-        try (InputStream input = new FileInputStream("config.properties")) {
+        try (InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties")) {
             Properties properties = new Properties();
             properties.load(input);
 
-            String host = properties.getProperty("mongoHost");
-            int port = Integer.parseInt(properties.getProperty("mongoPort"));
-            String username = properties.getProperty("mongoUserName");
-            String password = properties.getProperty("mongoUserPassword");
+            String host = properties.getProperty("mongo.host");
+            int port = Integer.parseInt(properties.getProperty("mongo.port"));
+            String username = properties.getProperty("mongo.user.name");
+            String password = properties.getProperty("mongo.user.password");
 
             TrackingDB db = new TrackingDB(host, port, username, password);
             dataCollector = new DataCollector(db);
 
             LOG.info("Initialization completed!");
         } catch (Exception e) {
-            LOG.severe("Initialization failed! ");
+            LOG.severe("Initialization failed! Exception: " + e.getMessage());
         }
 
     }
